@@ -14,6 +14,11 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
+    # add tags for CalculatorInterface
+    _instanceof:
+        AppBundle\Calculator\CalculatorInterface:
+            tags: ['app.calculator']
+
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     AppBundle\:
@@ -33,3 +38,7 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    # inject all tagged calculator service into registry
+    AppBundle\Registry\CalculatorRegistry:
+        arguments: [!tagged 'app.calculator']
